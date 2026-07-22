@@ -13,9 +13,12 @@ import productRoutes from './products/routes/productRoutes.js';
 // import userRoutes from './users/routes/userRoutes.js';
 // import discountRoutes from './admin/routes/discountRoutes.js';
 
-import seedDatabase from '../seeds/seedDatabase.js';
+// import seedDatabase from '../seeds/seedDatabase.js';
 
 const router = express.Router();
+router.get('/abc123', (req, res) => {
+  res.send('ABC WORKING');
+});
 
 // API version prefix
 const API_VERSION = '/api/v1';
