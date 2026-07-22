@@ -12,6 +12,7 @@ import productRoutes from './products/routes/productRoutes.js';
 // import uploadRoutes from './admin/routes/uploadRoutes.js';
 // import userRoutes from './users/routes/userRoutes.js';
 // import discountRoutes from './admin/routes/discountRoutes.js';
+import seedDatabase from '../seeds/seedDatabase.js';
 
 const router = express.Router();
 
@@ -57,6 +58,22 @@ router.use('*', (req, res) => {
     success: false,
     message: `Route ${req.originalUrl} not found`
   });
+});
+
+router.get('/seed-db', async (req, res) => {
+  try {
+    await seedDatabase();
+    res.json({
+      success: true,
+      message: 'Database seeded successfully'
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
 });
 
 export default router;

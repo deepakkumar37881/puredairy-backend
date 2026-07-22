@@ -904,6 +904,8 @@ const seedDatabase = async () => {
 };
 
 // Run seeding if this file is executed directly
-seedDatabase();
+if (process.argv[1].includes('seedDatabase.js')) {
+  seedDatabase();
+}
 
 export default seedDatabase;
