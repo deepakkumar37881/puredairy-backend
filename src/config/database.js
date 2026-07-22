@@ -1,21 +1,33 @@
-import mongoose from 'mongoose';
-import logger from '../utils/logger.js';
+import mongoose from "mongoose";
+import dns from "node:dns";
+
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 const connectDB = async () => {
   try {
-    // MongoDB localhost connection string
-    const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/organic-hub';
-    
-    const conn = await mongoose.connect(mongoUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    console.log("Mongo URI:", process.env.MONGODB_URI);
+
+    mongoose.set("debug", true);
+
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000,
     });
 
-    logger.info(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    logger.error('Error connecting to MongoDB:', error);
-    logger.info('Starting with in-memory storage for development...');
-    // Continue without database for development
+    console.log("✅ MongoDB Connected:", conn.connection.host);
+  } catch (err) {
+    console.error("========== MONGODB ERROR ==========");
+    console.error("Name:", err.name);
+    console.error("Message:", err.message);
+    console.error("Reason:", err.reason);
+
+    if (err.reason?.servers) {
+      for (const [host, server] of err.reason.servers) {
+        console.log("\nHost:", host);
+        console.log(server);
+      }
+    }
+
+    process.exit(1);
   }
 };
 

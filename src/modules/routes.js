@@ -1,7 +1,7 @@
 import express from 'express';
 // Temporarily commented out imports to fix server startup
 // import authRoutes from './auth/routes/authRoutes.js';
-// import productRoutes from './products/routes/productRoutes.js';
+import productRoutes from './products/routes/productRoutes.js';
 // import categoryRoutes from './products/routes/categoryRoutes.js';
 // import cartRoutes from './orders/routes/cartRoutes.js';
 // import orderRoutes from './orders/routes/orderRoutes.js';
@@ -39,7 +39,7 @@ router.get('/test', (req, res) => {
 
 // Mount API routes (temporarily commented out to fix import issues)
 // router.use(`${API_VERSION}/auth`, authRoutes);
-// router.use(`${API_VERSION}/products`, productRoutes);
+router.use(`${API_VERSION}/products`, productRoutes);
 // router.use(`${API_VERSION}/categories`, categoryRoutes);
 // router.use(`${API_VERSION}/cart`, cartRoutes);
 // router.use(`${API_VERSION}/orders`, orderRoutes);

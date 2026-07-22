@@ -10,9 +10,9 @@ import {
   getSeasonalProducts,
   searchProducts
 } from '../controllers/productController.js';
-import { protect, authorize } from '../middleware/auth.js';
-import { validate } from '../middleware/validation.js';
-import { searchLimiter } from '../middleware/rateLimiter.js';
+import { protect, authorize } from '../../../middleware/auth.js';
+import { validate } from '../../../middleware/validation.js';
+import { searchLimiter } from '../../../middleware/rateLimiter.js';
 
 const router = express.Router();
 

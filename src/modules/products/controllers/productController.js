@@ -1,12 +1,13 @@
 import Product from '../models/Product.js';
-import { asyncHandler } from '../middleware/errorHandler.js';
+import Category from '../models/Category.js';
+import { asyncHandler } from '../../../middleware/errorHandler.js';
 
 // @desc    Get all products
 // @route   GET /api/products
 // @access  Public
 export const getProducts = asyncHandler(async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 12;
+  const limit = parseInt(req.query.limit) || 100;
   const startIndex = (page - 1) * limit;
   
   const {
