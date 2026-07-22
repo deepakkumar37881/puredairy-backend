@@ -12,6 +12,7 @@ import productRoutes from './products/routes/productRoutes.js';
 // import uploadRoutes from './admin/routes/uploadRoutes.js';
 // import userRoutes from './users/routes/userRoutes.js';
 // import discountRoutes from './admin/routes/discountRoutes.js';
+
 import seedDatabase from '../seeds/seedDatabase.js';
 
 const router = express.Router();
@@ -38,42 +39,38 @@ router.get('/test', (req, res) => {
   });
 });
 
-// Mount API routes (temporarily commented out to fix import issues)
-// router.use(`${API_VERSION}/auth`, authRoutes);
+// Mount API routes
 router.use(`${API_VERSION}/products`, productRoutes);
-// router.use(`${API_VERSION}/categories`, categoryRoutes);
-// router.use(`${API_VERSION}/cart`, cartRoutes);
-// router.use(`${API_VERSION}/orders`, orderRoutes);
-// router.use(`${API_VERSION}/payments`, paymentRoutes);
-// router.use(`${API_VERSION}/reviews`, reviewRoutes);
-// router.use(`${API_VERSION}/admin`, adminRoutes);
-// router.use(`${API_VERSION}/seasonal`, seasonalRoutes);
-// router.use(`${API_VERSION}/upload`, uploadRoutes);
-// router.use(`${API_VERSION}/users`, userRoutes);
-// router.use(`${API_VERSION}/discounts`, discountRoutes);
 
-// 404 handler for undefined routes
-router.use('*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    message: `Route ${req.originalUrl} not found`
-  });
-});
-
+// ===============================
+// TEMPORARY DATABASE SEED ROUTE
+// ===============================
 router.get('/seed-db', async (req, res) => {
   try {
     await seedDatabase();
+
     res.json({
       success: true,
       message: 'Database seeded successfully'
     });
   } catch (err) {
     console.error(err);
+
     res.status(500).json({
       success: false,
       error: err.message
     });
   }
+});
+
+// ===============================
+// 404 Handler (ALWAYS LAST)
+// ===============================
+router.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route ${req.originalUrl} not found`
+  });
 });
 
 export default router;
