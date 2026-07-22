@@ -1,3 +1,4 @@
+import connectDB from "../config/database.js";
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Category from '../modules/products/models/Category.js';
@@ -12,37 +13,42 @@ dotenv.config();
 // Sample data
 const categories = [
   {
-    name: 'Milk',
-    description: 'Fresh milk products',
-    icon: '🥛',
+    name: "Milk",
+    slug: "milk",
+    description: "Fresh milk products",
+    icon: "🥛",
     featured: true,
     sortOrder: 1
   },
   {
-    name: 'Paneer',
-    description: 'Fresh paneer',
-    icon: '🧀',
+    name: "Paneer",
+    slug: "paneer",
+    description: "Fresh paneer",
+    icon: "🧀",
     featured: true,
     sortOrder: 2
   },
   {
-    name: 'Curd',
-    description: 'Fresh curd & yogurt',
-    icon: '🥣',
+    name: "Curd",
+    slug: "curd",
+    description: "Fresh curd & yogurt",
+    icon: "🥣",
     featured: true,
     sortOrder: 3
   },
   {
-    name: 'Butter & Ghee',
-    description: 'Butter and ghee',
-    icon: '🧈',
+    name: "Butter & Ghee",
+    slug: "butter-ghee",
+    description: "Butter and ghee",
+    icon: "🧈",
     featured: true,
     sortOrder: 4
   },
   {
-    name: 'Cheese',
-    description: 'Premium cheese',
-    icon: '🧀',
+    name: "Cheese",
+    slug: "cheese",
+    description: "Premium cheese",
+    icon: "🧀",
     featured: true,
     sortOrder: 5
   }
@@ -749,17 +755,17 @@ const products = [
 ];
 
 // Connect to database
-const connectDB = async () => {
-  try {
-    const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/organic-hub';
-    console.log("Mongo URI:", mongoUri);
-    await mongoose.connect(mongoUri);
-    logger.info('MongoDB Connected for seeding');
-  } catch (error) {
-    logger.error('Error connecting to MongoDB:', error);
-    process.exit(1);
-  }
-};
+// const connectDB = async () => {
+//   try {
+//     const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/organic-hub';
+//     console.log("Mongo URI:", mongoUri);
+//     await mongoose.connect(mongoUri);
+//     logger.info('MongoDB Connected for seeding');
+//   } catch (error) {
+//     logger.error('Error connecting to MongoDB:', error);
+//     process.exit(1);
+//   }
+// };
 
 // Seed categories
 const seedCategories = async () => {
